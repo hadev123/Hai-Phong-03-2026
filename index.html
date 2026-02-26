@@ -567,39 +567,6 @@
         <!-- Itinerary -->
         <div id="itinerary-list" class="space-y-24 mb-24"></div>
 
-        <!-- Budget Summary -->
-        <div
-          id="budget-summary"
-          class="bg-white/60 backdrop-blur-xl rounded-[4rem] p-8 md:p-16 shadow-2xl border border-white/50 mb-24"
-        >
-          <h2
-            class="font-serif text-5xl text-slate-900 italic font-bold mb-12 text-center"
-          >
-            Tổng Chi Phí Các Mục
-          </h2>
-          <div
-            id="budget-grid"
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          ></div>
-          <div
-            class="mt-16 p-10 bg-gradient-to-r from-green-900 to-green-800 rounded-[3rem] text-white flex flex-col md:flex-row justify-between items-center gap-8 shadow-2xl"
-          >
-            <div>
-              <p
-                class="text-green-300 text-xs font-bold uppercase tracking-widest mb-2"
-              >
-                Dự kiến mỗi người
-              </p>
-              <p class="text-5xl font-serif italic" id="total-cost-display">
-                ~ 0 VNĐ
-              </p>
-            </div>
-            <div class="text-right hidden md:block">
-              <i class="fas fa-mountain text-6xl text-green-700/50"></i>
-            </div>
-          </div>
-        </div>
-
         <!-- Bảng số tiền thực -->
         <div
           id="expense-section"
@@ -679,7 +646,6 @@
 
       const SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycbxS3flJSJZLlkp3aCP5ECMHnHOqLB6vxgXUL6JUFTLlxOH16EKaEiQ6A2aQ-ZyqVKTA/exec";
-        
 
       // Hàm hiển thị/ẩn loading
       function toggleTableLoading(show) {
@@ -754,7 +720,16 @@
         }
       };
 
-      const groupMembers = ["Anh", "Linh", "Hieu", "Chi", "Dong", "Dung", "Hah", "Quanh"];
+      const groupMembers = [
+        "Anh",
+        "Linh",
+        "Hieu",
+        "Chi",
+        "Dong",
+        "Dung",
+        "Hah",
+        "Quanh",
+      ];
 
       function openExpenseModal() {
         const modal = document.getElementById("expense-modal");
@@ -1191,48 +1166,48 @@
       const initialData = {
         total: "1,500,000 VNĐ",
         footerImg:
-          "https://drive.google.com/file/d/1mZYMt6QH3tPtVnBC7f-ioffpBQwkjcFA/view?usp=sharing",
+          "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125043/9_nk8m9e.jpg?w=1000",
         team: {
           leader: {
             name: "Lê Hoàng Anh",
             role: "Trưởng đoàn",
-            img: "https://drive.google.com/file/d/1S3_q_vgIhvwqVT5bXAm9VIanKIgKjUBc/view?usp=sharing",
+            img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125002/8_tw1584.jpg?w=1000",
           },
           members: [
             {
               name: "Nguyễn Khắc Hiếu",
               role: "Chi tiền",
-              img: "https://drive.google.com/file/d/16VD_9fR13A3yl2dVU-BVVIbEb99fRcIY/view?usp=sharing",
+              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772124997/1_oycs3x.jpg?w=1000",
             },
             {
               name: "Lê Linh Chi",
               role: "Giúp việc cho Hiếu",
-              img: "https://drive.google.com/file/d/1zmHCGiuWms02X9yfmTq64Y4hcBCyhwBR/view?usp=sharing",
+              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125010/3_jfajzp.jpg?w=1000",
             },
             {
               name: "Nguyễn Kim Dung",
               role: "Ăn, ngủ, ẻ",
-              img: "https://drive.google.com/file/d/1pw7S6B1vNhU1XzPN8GPMJ1AHMTripdbN/view?usp=sharing",
+              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125000/6_xoollh.jpg?w=1000",
             },
             {
               name: "Lê Đình Đông",
               role: "Photographer",
-              img: "https://drive.google.com/file/d/1dQWdhRC4B1jRyho5laOgflWns9h1hGhh/view?usp=sharing",
+              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772124999/7_zrydvc.jpg?w=1000",
             },
             {
               name: "Trương Thuỳ Linh",
               role: "Đang chửa",
-              img: "https://drive.google.com/file/d/1T-orDQHYzB9NvoXg27prOhLT4Xairs-9/view?usp=sharing",
+              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125032/4_evkajn.jpg?w=1000",
             },
             {
               name: "Nguyễn Quỳnh Anh",
               role: "Chưa chắc đã đi",
-              img: "https://drive.google.com/file/d/1cMiLnyfBWESEpMW50eb_69nMiIz3EBPL/view?usp=sharing",
+              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125030/5_q0uejn.jpg?w=1000",
             },
             {
               name: "Đỗ Huyền Anh",
               role: "Ăn, ngủ, ẻ",
-              img: "https://drive.google.com/file/d/1XpBHo-kO07DCnAAv6N4RHhIrnaxXOAvX/view?usp=sharing",
+              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125011/2_yalqip.png?w=1000",
             },
           ],
         },
@@ -1268,59 +1243,67 @@
             title: "Khởi hành",
             activities: [
               {
-                time: "16:00",
-                icon: "fa-plane",
-                title: "Bay HN - Hải Phòng",
-                note: "Vietjet Air",
-                detail: "Di chuyển ra sân bay (Ô tô) + Xe Lado về KS (Ô tô)",
-                cost: "1.911.800",
+                time: "07:00",
+                icon: "fa-car",
+                title: "Đi xe limo Hà Nội - Hải Phòng",
+                note: "Limo 9 chỗ",
+                detail:
+                  "Di chuyển từ Đại học Thương Mại về Khách sạn Diamond Crown",
+                cost: "250.000/chiều đi",
                 image:
-                  "https://media-cdn-v2.laodong.vn/storage/newsportal/2024/7/23/1370297/Vietjet-122.jpg?w=1000",
-                map: "https://maps.app.goo.gl/8wH6qrLfnJRSrFdn6",
+                  "https://www.viphoangphuong.com/upload/cdn/images/z7367684849498_dc057efd09151b03583e110ee72e8080.jpg?w=1000",
+                map: "https://maps.app.goo.gl/qBpaBNf3oNKTrkZaA",
               },
               {
-                time: "19:45 - 22:00",
+                time: "14:00",
                 icon: "fa-motorcycle",
-                title: "Ăn Cà ri Chàaa",
-                note: "32 Đường Ánh Sáng",
-                detail: "Di chuyển bằng Ô tô. Check-in tháp Vinaphone",
-                cost: "100.000",
+                title: "Checkin khách sạn",
+                note: "Cất đồ tại khách sạn và thuê xe máy",
+                detail: "Di chuyển đi ăn trưa và cafe",
+                cost: "150.000/xe",
                 image:
-                  "https://drive.google.com/file/d/1OJ84eEemI4m7CX7688VLZQ6-r2tuImhx/view?usp=sharing?w=1000",
-                map: "https://maps.app.goo.gl/nv97PL4AeEg36d1TA",
+                  "https://drive.google.com/file/d/1Cg9TxL10hrRg4Yk-lWxu0kNzafFfBEdA/view?usp=sharing?w=1000",
+              },
+              {
+                time: "18:00-23:00",
+                icon: "fa-motorcycle",
+                title: "Quẩy nát Hải Phòng",
+                note: "Ăn uống chơi bời",
+                detail: "Đi đ đâu mình thích là được",
+                cost: "500.000",
+                image:
+                  "https://drive.google.com/file/d/1-d5AfN4KRIzoMclfJNuCDqhoOviNict5/view?usp=sharing?w=1000",
               },
             ],
           },
           {
             day: "Ngày 2",
-            date: "02/01",
-            title: "Đi nàooo",
+            date: "08/03/2026",
+            title: "Đi Đảo Vũ Yên nàooo",
             activities: [
               {
-                time: "07:30 - 08:00",
+                time: "06:30 - 10:00",
                 type: "eat",
                 icon: "fa-motorcycle",
-                title: "Ăn sáng bánh mỳ xíu mại",
-                note: "Bánh mì Xíu mại 79 Gốc - Đường Thông Thiên Học",
-                detail: "Di chuyển bằng Xe máy.",
-                cost: "50.000",
+                title: "Ăn sáng",
+                note: "Ăn gì cũng đươc",
+                detail: "Di chuyển bằng Xe máy",
+                cost: "500.000",
                 image:
-                  "https://drive.google.com/file/d/1WwWLXdvkpw-ESnEkw2NRC5CtBCftqYsY/view?usp=sharing?w=1000",
-                map: "https://maps.app.goo.gl/CtAZ5e2cQ2JjZTkEA",
+                  "https://mia.vn/media/uploads/blog-du-lich/dao-vu-yen-1-1741187689.jpg?w=1000",
+                map: "https://maps.app.goo.gl/3Tdgkqm2qGADWDC57",
               },
               {
-                time: "08:00 - 11:30",
-                type: "play",
+                time: "12:00",
                 icon: "fa-car-side",
-                title: "Mongo Land",
-                note: "120k/vé + xe 390k/chiều",
-                detail:
-                  "Vé +1 nước, mang đồ ăn vào, các trò chơi ko giới hạn. Go kart thì thêm 150,000",
-                cost: "300.000",
+                title: "Checkout",
+                note: "Trả xe máy, ăn xong rồi về",
+                detail: "Nhớ đừng quên gì nhé",
+                cost: "250.000/chiều về",
                 image:
-                  "https://agotourist.com/wp-content/uploads/2022/08/tro-choi-truot-phao-kho-tai-mongo-land.jpg?w=1000",
-                map: "https://maps.app.goo.gl/B9qNvWc9ZsXodHzf6",
-              }
+                  "https://www.viphoangphuong.com/upload/cdn/images/z7367684849498_dc057efd09151b03583e110ee72e8080.jpg?w=1000",
+                map: "https://maps.app.goo.gl/gGVBs5rr3u6EngR4A",
+              },
             ],
           },
         ],
