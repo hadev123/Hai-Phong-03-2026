@@ -247,9 +247,10 @@
               >Số tiền (VNĐ)</label
             >
             <input
-              type="number"
+              type="text"
               id="ex-amount"
-              placeholder="Ví dụ: 500000"
+              placeholder="Ví dụ: 500.000"
+              inputmode="numeric"
               class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-orange-500 outline-none transition font-bold text-orange-600"
             />
           </div>
@@ -625,7 +626,7 @@
         >
           <img
             id="footer-image"
-            src=""
+            src="https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125043/9_nk8m9e.jpg"
             class="w-full h-full object-cover scale-105"
           />
           <div
@@ -687,38 +688,53 @@
 
       // Form điền tiền thực
       window.onload = async function () {
-        const savedData = localStorage.getItem("tripExpenses");
-        if (savedData) {
-          expenses = JSON.parse(savedData);
+        toggleTableLoading(true);
+
+        try {
+          const response = await fetch(SCRIPT_URL);
+          const cloudData = await response.json();
+
+          if (cloudData && cloudData.length > 0) {
+            expenses = cloudData;
+            localStorage.setItem("tripExpenses", JSON.stringify(expenses));
+          } else {
+            const savedData = localStorage.getItem("tripExpenses");
+            if (savedData) {
+              expenses = JSON.parse(savedData);
+            }
+          }
+
+          updateExpenseTable();
+
           if (expenses.length > 0) {
             document
               .getElementById("expense-section")
               .classList.remove("hidden");
+          }
+        } catch (e) {
+          console.warn("Cloud lỗi → dùng local");
+          const savedData = localStorage.getItem("tripExpenses");
+          if (savedData) {
+            expenses = JSON.parse(savedData);
             updateExpenseTable();
           }
-        }
-
-        // Chỉ kéo từ Cloud về nếu LocalStorage trống (để tránh bị hiện lại dòng đã xóa)
-        if (!savedData) {
-          toggleTableLoading(true);
-          try {
-            const response = await fetch(SCRIPT_URL);
-            const cloudData = await response.json();
-            if (cloudData && cloudData.length > 0) {
-              expenses = cloudData;
-              localStorage.setItem("tripExpenses", JSON.stringify(expenses));
-              updateExpenseTable();
-              document
-                .getElementById("expense-section")
-                .classList.remove("hidden");
-            }
-          } catch (e) {
-            console.warn("Cloud trống hoặc lỗi kết nối");
-          } finally {
-            toggleTableLoading(false);
-          }
+        } finally {
+          toggleTableLoading(false);
         }
       };
+
+      setInterval(async () => {
+        try {
+          const res = await fetch(SCRIPT_URL);
+          const cloudData = await res.json();
+
+          if (JSON.stringify(cloudData) !== JSON.stringify(expenses)) {
+            expenses = cloudData;
+            localStorage.setItem("tripExpenses", JSON.stringify(expenses));
+            updateExpenseTable();
+          }
+        } catch {}
+      }, 8000);
 
       const groupMembers = [
         "Anh",
@@ -749,7 +765,7 @@
         const payer = document.getElementById("ex-payer").value.trim();
         const content = document.getElementById("ex-content").value;
         const amountInput = document.getElementById("ex-amount").value;
-        const amount = parseFloat(amountInput);
+        const amount = parseFloat(amountRaw.replace(/\./g, ""));
 
         const checkboxes = document.querySelectorAll(
           '#participant-list input[type="checkbox"]:checked',
@@ -1166,7 +1182,7 @@
       const initialData = {
         total: "1,500,000 VNĐ",
         footerImg:
-          "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125043/9_nk8m9e.jpg?w=1000",
+          "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125043/9_nk8m9e.jpg",
         team: {
           leader: {
             name: "Lê Hoàng Anh",
@@ -1174,6 +1190,11 @@
             img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125002/8_tw1584.jpg?w=1000",
           },
           members: [
+            {
+              name: "Trương Thuỳ Linh",
+              role: "Đang chửa",
+              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125032/4_evkajn.jpg?w=1000",
+            },
             {
               name: "Nguyễn Khắc Hiếu",
               role: "Chi tiền",
@@ -1194,11 +1215,7 @@
               role: "Photographer",
               img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772124999/7_zrydvc.jpg?w=1000",
             },
-            {
-              name: "Trương Thuỳ Linh",
-              role: "Đang chửa",
-              img: "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125032/4_evkajn.jpg?w=1000",
-            },
+
             {
               name: "Nguyễn Quỳnh Anh",
               role: "Chưa chắc đã đi",
@@ -1249,7 +1266,7 @@
                 note: "Limo 9 chỗ",
                 detail:
                   "Di chuyển từ Đại học Thương Mại về Khách sạn Diamond Crown",
-                cost: "250.000/chiều đi",
+                cost: "250.000",
                 image:
                   "https://www.viphoangphuong.com/upload/cdn/images/z7367684849498_dc057efd09151b03583e110ee72e8080.jpg?w=1000",
                 map: "https://maps.app.goo.gl/qBpaBNf3oNKTrkZaA",
@@ -1260,7 +1277,7 @@
                 title: "Checkin khách sạn",
                 note: "Cất đồ tại khách sạn và thuê xe máy",
                 detail: "Di chuyển đi ăn trưa và cafe",
-                cost: "150.000/xe",
+                cost: "150.000",
                 image:
                   "https://drive.google.com/file/d/1Cg9TxL10hrRg4Yk-lWxu0kNzafFfBEdA/view?usp=sharing?w=1000",
               },
@@ -1288,7 +1305,7 @@
                 title: "Ăn sáng",
                 note: "Ăn gì cũng đươc",
                 detail: "Di chuyển bằng Xe máy",
-                cost: "500.000",
+                cost: "425.000",
                 image:
                   "https://mia.vn/media/uploads/blog-du-lich/dao-vu-yen-1-1741187689.jpg?w=1000",
                 map: "https://maps.app.goo.gl/3Tdgkqm2qGADWDC57",
@@ -1299,7 +1316,7 @@
                 title: "Checkout",
                 note: "Trả xe máy, ăn xong rồi về",
                 detail: "Nhớ đừng quên gì nhé",
-                cost: "250.000/chiều về",
+                cost: "250.000",
                 image:
                   "https://www.viphoangphuong.com/upload/cdn/images/z7367684849498_dc057efd09151b03583e110ee72e8080.jpg?w=1000",
                 map: "https://maps.app.goo.gl/gGVBs5rr3u6EngR4A",
@@ -1479,6 +1496,23 @@
           }, 2000);
         }
       }
+
+      // ===== FORMAT TIỀN INPUT =====
+      document.addEventListener("DOMContentLoaded", () => {
+        const amountInput = document.getElementById("ex-amount");
+        if (!amountInput) return;
+
+        amountInput.addEventListener("input", (e) => {
+          let raw = e.target.value.replace(/[^\d]/g, ""); // chỉ giữ số
+
+          if (!raw) {
+            e.target.value = "";
+            return;
+          }
+
+          e.target.value = Number(raw).toLocaleString("vi-VN");
+        });
+      });
 
       const editor = document.getElementById("json-input");
       editor.value = JSON.stringify(initialData, null, 4);
