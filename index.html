@@ -677,13 +677,16 @@
       //Convert Datetime
       function formatDate(dateStr) {
         if (!dateStr) return "";
-        // Nếu dateStr có dạng YYYY-MM-DD (từ input date)
-        if (dateStr.includes("-")) {
-          const [year, month, day] = dateStr.split("-");
-          // Nếu phần đầu là năm (4 chữ số) thì mới đảo
-          if (year.length === 4) return `${day}-${month}-${year}`;
-        }
-        return dateStr; // Trả về nguyên bản nếu đã đúng định dạng
+
+        const date = new Date(dateStr);
+
+        if (isNaN(date)) return dateStr;
+
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+
+        return `${day}-${month}-${year}`;
       }
 
       // Form điền tiền thực
@@ -765,7 +768,8 @@
         const payer = document.getElementById("ex-payer").value.trim();
         const content = document.getElementById("ex-content").value;
         const amountInput = document.getElementById("ex-amount").value;
-        const amount = parseFloat(amountRaw.replace(/\./g, ""));
+        const amountRaw = document.getElementById("ex-amount").value;
+        const amount = parseFloat(amountRaw.replace(/[^\d]/g, ""));
 
         const checkboxes = document.querySelectorAll(
           '#participant-list input[type="checkbox"]:checked',
@@ -1272,24 +1276,77 @@
                 map: "https://maps.app.goo.gl/qBpaBNf3oNKTrkZaA",
               },
               {
+                time: "09:00 - 10:00",
+                icon: "fa-motorcycle",
+                title: "Ăn sáng Bánh đa cua Ngõ 46 Lạch Tray - Chú Dũng",
+                note: "Về khách sạn cất đồ tại khách sạn và thuê xe máy",
+                detail: "Đi ăn sáng và uống trà",
+                cost: "50.000",
+                image:
+                  "https://hpbook.thietbiytegiadinh.vn/2024-08/070824_140159665.jpg",
+                map: "https://maps.app.goo.gl/zpau5nQzSfUq5i2i9",
+              },
+              {
+                time: "10:00 - 11:00",
+                icon: "fa-motorcycle",
+                title: "Uống trà cúc chú Huy - 6H P. Phạm Ngũ Lão, Lương Khá Thien, Ngô Quyền",
+                note: "Uống trà để chuẩn bị đi ăn",
+                detail: "Uống thử đi cho vui, 2 người 1 cốc còn ăn trưa",
+                cost: "30.000",
+                image:
+                  "https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/607641645_122109072747141784_5596677351644484154_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=rr6qLCdEeEkQ7kNvwHYN33R&_nc_oc=Adl2xKCS0v-9nUix_5ugmHRdTYUWDEMRv1rJO6LwdnSkc4Cq986_nQ73hyuDjF8mlRM-h7O07MBIwrqsJ-2iaZ41&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&_nc_gid=K2DEVzvBPh563H6Wpxp_oQ&oh=00_AfsHIopto7zrOVl6qWe-J0TXgWp5TVdGRfo3aNeXzuvORA&oe=69A7BBE1",
+                map: "https://maps.app.goo.gl/icDyn1jDiWqHEhwG9",
+              },
+              {
+                time: "11:00 - 13:30",
+                icon: "fa-motorcycle",
+                title: "Ăn trưa bún chả Thanh Ngà - 92 Trần Nhật Duật",
+                note: "Rất ngon",
+                detail: "Ăn nhanh còn về checkin",
+                cost: "100.000",
+                image:
+                  "https://sonhailimousine.com/upload/filemanager/nem-cua-be-hai-phong%20(7).png",
+                map: "https://maps.app.goo.gl/xA1toUvCJSu5jowG8",
+              },
+              {
                 time: "14:00",
                 icon: "fa-motorcycle",
                 title: "Checkin khách sạn thôiii",
-                note: "Cất đồ tại khách sạn và thuê xe máy",
-                detail: "Di chuyển đi ăn trưa và cafe",
-                cost: "150.000",
+                note: "Nhớ về đúng phòng",
+                detail: "Nghỉ ngơi đến 16h nhé rồi đi lượn",
+                cost: "0",
                 image:
                   "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125011/11_hhwzgb.jpg",
               },
               {
-                time: "18:00 - 23:00",
+                time: "16:00 - 17:00",
                 icon: "fa-motorcycle",
-                title: "Quẩy nát Hải Phòng",
-                note: "Ăn uống chơi bời",
-                detail: "Đi đ đâu mình thích là được",
-                cost: "500.000",
+                title: "Ăn chiều bánh bèo cô Mây",
+                note: "Ngon khônggg",
+                detail: "Ăn vừa vừa để dành bụng ăn tối",
+                cost: "50.000",
+                image:
+                  "https://cdn.tgdd.vn/Files/2023/09/27/1549282/chieu-toi-bung-con-cao-thuong-thuc-banh-beo-co-may-hai-phong-202309271341322595.jpg",
+                map: "https://maps.app.goo.gl/zsbsofGBYAyofXs16",
+              },
+              {
+                time: "19:00 - 22:00",
+                icon: "fa-motorcycle",
+                title: "Ăn tối Thương Ốc 269 - Lê Lợi",
+                note: "Ngon khônggg",
+                cost: "300.000",
+                image: "https://sonhailimousine.com/upload/filemanager/quan-oc-ngon-hai-phong%20(7).png",
+                map: "https://hpbook.thietbiytegiadinh.vn/2024-09/020924_122919310.jpg",
+              },
+              {
+                time: "22:00 - 24:00",
+                icon: "fa-motorcycle",
+                title: "Hết nấc đêm nay thôi",
+                note: "Gameeeee",
+                cost: "0",
                 image:
                   "https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125005/10_wgiq45.jpg",
+                map: "https://maps.app.goo.gl/yjzz5LnXYFhuVTC6A",
               },
             ],
           },
@@ -1299,19 +1356,40 @@
             title: "Đi Đảo Vũ Yên nàooo",
             activities: [
               {
-                time: "06:30 - 10:00",
+                time: "06:30 - 07:30",
                 type: "eat",
                 icon: "fa-motorcycle",
-                title: "Ăn sáng",
-                note: "Ăn gì cũng đươc",
+                title: "Ăn sáng Bún Cá Cay Cô Thúy",
+                note: "Cay tý buổi sáng cho nó tưng bừng",
                 detail: "Di chuyển bằng Xe máy",
-                cost: "425.000",
+                cost: "50.000",
+                image: "https://sonhailimousine.com/upload/filemanager/bun-ca-cay-hai-phong%20(9).png",
+                map: "https://maps.app.goo.gl/MJqtBTm8xHgs9X9y5",
+              },
+              {
+                time: "07:30 - 09:30",
+                type: "eat",
+                icon: "fa-motorcycle",
+                title: "Đến Vũ Yên thoyyy",
+                note: "Đến việc của anh Đông rồi",
+                detail: "Di chuyển bằng Xe máy",
+                cost: "0",
                 image:
                   "https://mia.vn/media/uploads/blog-du-lich/dao-vu-yen-1-1741187689.jpg?w=1000",
                 map: "https://maps.app.goo.gl/3Tdgkqm2qGADWDC57",
               },
               {
-                time: "12:00",
+                time: "09:30 - 11:00",
+                icon: "fa-car-side",
+                title: "Ăn trưa cơm Tấm Lộc Vừng - 224 Hành Kênh",
+                note: "Ăn xong về dọn đồ",
+                detail: "Trả xe máy, ăn xong rồi về",
+                cost: "150.000",
+                image: "https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/473913JSv/com-tam-hai-phogn-3.jpg",
+                map: "https://maps.app.goo.gl/zCS7seCR4NLKVAKy9",
+              },
+              {
+                time: "11:00 - 12:00",
                 icon: "fa-car-side",
                 title: "Checkout",
                 note: "Trả xe máy, ăn xong rồi về",
@@ -1321,6 +1399,35 @@
                   "https://www.viphoangphuong.com/upload/cdn/images/z7367684849498_dc057efd09151b03583e110ee72e8080.jpg?w=1000",
                 map: "https://maps.app.goo.gl/gGVBs5rr3u6EngR4A",
               },
+            ],
+          },
+          {
+            day: "Gợi ý thêmm",
+            date: "08/03/2026",
+            title: "Gợi ý món khác",
+            activities: [
+              {
+                time: "00",
+                type: "eat",
+                icon: "fa-motorcycle",
+                title: "Bánh mỳ cay ông Cuông",
+                note: "Có 2 cơ sở",
+                detail: "Di chuyển bằng Xe máy",
+                cost: "0",
+                image: "https://khietminhbakery.com/wp-content/uploads/2025/09/hinh-anh-banh-mi-cay-ong-cuong-mon-an-vat-dac-trung-cua-hai-phong.jpg",
+                map: "https://maps.app.goo.gl/bvesEjqP6L2dAVDYA",
+              },
+              {
+                time: "00",
+                type: "eat",
+                icon: "fa-motorcycle",
+                title: "Chè Thái - 149 Hàng Kênh",
+                note: "Chè Thái Nguyên",
+                detail: "Di chuyển bằng Xe máy",
+                cost: "0",
+                image: "https://toplist.vn/images/800px/che-my-1140365.jpg",
+                map: "https://maps.app.goo.gl/Ri9mVtUNe9GLdvGu7",
+              }
             ],
           },
         ],
