@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hải Phòng 2026 Planner - Artistic & Drive Support</title>
+    <title>Hải Phòng 03/2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -129,7 +129,7 @@
     ></i>
 
     <!-- Music Toggle -->
-    <div class="fixed bottom-4 right-4 z-50">
+    <div class="fixed bottom-36 right-4 z-50 mb-2">
       <button
         onclick="toggleMusic()"
         class="flex items-center gap-2 bg-white/90 backdrop-blur p-2 md:p-3 rounded-full shadow-xl hover:scale-110 transition"
@@ -149,13 +149,13 @@
       </button>
       <audio id="bg-music" loop>
         <source
-          src="https://res.cloudinary.com/dpqknp0mo/video/upload/v1772041051/haiphong11_bledfw.mp4"
+          src="https://res.cloudinary.com/dpqknp0mo/video/upload/v1776095015/1_b7j3x5.mp4"
           type="audio/mp4"
         />
       </audio>
     </div>
 
-    <div class="fixed bottom-24 right-4 z-50">
+    <div class="fixed bottom-20 right-4 z-50 mb-2">
       <button
         onclick="openExpenseModal()"
         class="flex items-center gap-2 bg-white/90 backdrop-blur p-2 md:p-3 rounded-full shadow-xl hover:scale-110 transition"
@@ -168,6 +168,23 @@
 
         <span class="hidden md:block text-xs font-bold text-slate-600">
           Ghi chi tiêu
+        </span>
+      </button>
+    </div>
+
+    <div class="fixed bottom-4 right-4 z-50 mb-2">
+      <button
+        onclick="goHome()"
+        class="flex items-center gap-2 bg-white/90 backdrop-blur p-2 md:p-3 rounded-full shadow-xl hover:scale-110 transition"
+      >
+        <div
+          class="w-9 h-9 md:w-10 md:h-10 bg-gray-500 text-white rounded-full flex items-center justify-center"
+        >
+          <i class="fas fa-arrow-left text-lg"></i>
+        </div>
+
+        <span class="hidden md:block text-xs font-bold text-slate-600">
+          Về Home
         </span>
       </button>
     </div>
@@ -1294,7 +1311,7 @@
                 detail: "Uống thử đi cho vui, 2 người 1 cốc còn ăn trưa",
                 cost: "30.000",
                 image:
-                  "https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/607641645_122109072747141784_5596677351644484154_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=rr6qLCdEeEkQ7kNvwHYN33R&_nc_oc=Adl2xKCS0v-9nUix_5ugmHRdTYUWDEMRv1rJO6LwdnSkc4Cq986_nQ73hyuDjF8mlRM-h7O07MBIwrqsJ-2iaZ41&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&_nc_gid=K2DEVzvBPh563H6Wpxp_oQ&oh=00_AfsHIopto7zrOVl6qWe-J0TXgWp5TVdGRfo3aNeXzuvORA&oe=69A7BBE1",
+                  "https://static.vinwonders.com/production/tra-cuc-hai-phong-10.jpg",
                 map: "https://maps.app.goo.gl/icDyn1jDiWqHEhwG9",
               },
               {
@@ -1640,6 +1657,10 @@
         } catch (err) {}
       });
       render(initialData);
+
+      function goHome() {
+        window.location.href = "index.html";
+      }
     </script>
   </body>
 </html>

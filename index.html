@@ -8,7 +8,6 @@
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font chuẩn tiếng Việt -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
       rel="stylesheet"
@@ -20,12 +19,10 @@
         background: linear-gradient(135deg, #fef9c3, #bae6fd, #fca5a5);
         color: #1e293b;
         overflow-x: hidden;
-
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
       }
 
-      /* ánh sáng mùa hè */
       body::before {
         content: "";
         position: fixed;
@@ -90,7 +87,6 @@
   </head>
 
   <body>
-    <!-- HERO -->
     <section
       class="h-screen flex flex-col justify-center items-center text-center px-4"
     >
@@ -171,6 +167,11 @@
           src="https://res.cloudinary.com/dpqknp0mo/image/upload/v1776011864/z7718796781927_746407652d039d38078518f410ee9885_f3qsx1.jpg"
         />
 
+        <img
+          class="slide w-full h-full object-cover"
+          src="https://res.cloudinary.com/dpqknp0mo/image/upload/v1772125005/10_wgiq45.jpg"
+        />
+
         <button
           onclick="prevSlide()"
           class="absolute left-4 top-1/2 bg-white/60 px-4 py-2 rounded-full"
@@ -233,7 +234,7 @@
             />
           </div>
 
-          <p class="font-medium">Hiếu số 2</p>
+          <p class="font-medium">Hiếu Số 2</p>
         </div>
 
         <div
@@ -303,7 +304,7 @@
             class="w-28 h-28 mx-auto mb-3 rounded-full overflow-hidden shadow-md"
           >
             <img
-              src="https://res.cloudinary.com/dpqknp0mo/image/upload/v1776012835/79530364_774346089706711_7665991928680284160_n_h9jdn5.jpg"
+              src="https://res.cloudinary.com/dpqknp0mo/image/upload/v1776094080/sddaad_118c69.jpg"
               class="w-full h-full object-cover"
             />
           </div>
@@ -398,15 +399,15 @@
       //music
       const music = document.getElementById("bg-music");
 
-      document.addEventListener(
-        "click",
-        () => {
-          if (music) {
+      ["click", "scroll", "touchstart"].forEach((event) => {
+        document.addEventListener(
+          event,
+          () => {
             music.play().catch(() => {});
-          }
-        },
-        { once: true },
-      );
+          },
+          { once: true },
+        );
+      });
     </script>
   </body>
 </html>
